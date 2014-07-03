@@ -2,10 +2,10 @@
 /*
   Plugin Name: GF Upload to Email Attachment
   Plugin URI: http://www.gregwhitehead.us/
-  Description: Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  By just adding GFUEA to the name it allows you to attach the files to multiple notifications if wanted.  
+  Description: Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.
   Author: Greg Whitehead
   Author URI: http://www.billiardgreg.com
-  Version: 0.1
+  Version: 1.0
  */
  
  
