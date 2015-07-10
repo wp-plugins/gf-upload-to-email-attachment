@@ -1,6 +1,6 @@
 === GF Upload to Email Attachment ===
 Contributors: billiardgreg
-Donate link: http://www.billiardgreg.com/
+Donate link: http://wpcms.ninja/
 Tags: 
 Requires at least: 3.8.3
 Tested up to: 3.9.1
@@ -14,7 +14,7 @@ This allows you to create a notification in gravity forms of an email that would
 
 Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  
 
-Works with both single and multiple upload boxes as well as multiiple notifiations.  As this notification name isn't really used in any other place I thought it would be the easiest way to add this functionality.
+Works with both single and multiple upload boxes as well as multiiple notifiations.  As this notification name isn't really used in any other place I thought it would be the easiest way to add this functionality.  If multiple files are attached it attempts to create a zip file to send and after confirmation message is sent it removes the zip file.
 
 Utilizes code example from Gravity Forms gforms_notification page modified to attach the files getting uploaded to the notification email based upon last 5 characters of the notification name.    
 
@@ -22,7 +22,7 @@ Utilizes code example from Gravity Forms gforms_notification page modified to at
 
 = Where can I get answers to questions? =
 
-You can email greg@billiardgreg.com to receive answers or go to http://www.gregwhitehead.us
+You can email greg@wpcms.ninja to receive answers or go to http://wpcms.ninja
 
 == Installation ==
 
@@ -36,6 +36,9 @@ Add GFUEA to the Gravity Forms email notification name and all files uploaded wi
 
 == Changelog ==
 
+= 1.1 =
+* Added zip functionality to multifile upload.
+
 = 1.0 =
 * Updated description and changed to stable version 1.0
 
@@ -43,6 +46,9 @@ Add GFUEA to the Gravity Forms email notification name and all files uploaded wi
 * Initial Release of Plugin
 
 == Upgrade Notice ==
+
+= 1.1 =
+* Added zip functionality to multifile upload.
 
 = .1 =
 * Initial Release of Plugin
