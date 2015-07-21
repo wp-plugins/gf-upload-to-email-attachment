@@ -8,13 +8,13 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This allows you to create a notification in gravity forms of an email that would send with the files being uploaded by that form as an attachment. 
+This allows you to create a notification in gravity forms of an email that would send with the files being uploaded by that form as an attachment. Use GFEAU and GFEAUNZ in the notification title you can add files to outbound email.
 
 == Description ==
 
 Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  
 
-Works with both single and multiple upload boxes as well as multiiple notifiations.  As this notification name isn't really used in any other place I thought it would be the easiest way to add this functionality.  If multiple files are attached it attempts to create a zip file to send and after confirmation message is sent it removes the zip file.
+Works with both single and multiple upload boxes as well as multiiple notifiations.  As this notification name isn't really used in any other place I thought it would be the easiest way to add this functionality.  If multiple files are attached it attempts to create a zip file to send and after confirmation message is sent it removes the zip file.  Adding NZ so the end of the notification reads GFUEANZ tells the plugin to not zip up the files when attaching.
 
 Utilizes code example from Gravity Forms gforms_notification page modified to attach the files getting uploaded to the notification email based upon last 5 characters of the notification name.    
 
@@ -28,13 +28,19 @@ You can email greg@wpcms.ninja to receive answers or go to http://wpcms.ninja
 
 Install plugin and activate.
 
-Add GFUEA to the Gravity Forms email notification name and all files uploaded will be attached to outbound email.
+Add GFUEA or GFUEANZ for No Zipping to the Gravity Forms email notification name and all files uploaded will be attached to outbound email.
 
 == Screenshots ==
 
 1. No Screenshot
 
 == Changelog ==
+
+= 1.3 =
+* Updated readme.
+
+= 1.2 =
+* Added no zip addition to multifile upload.
 
 = 1.1 =
 * Added zip functionality to multifile upload.
@@ -46,6 +52,12 @@ Add GFUEA to the Gravity Forms email notification name and all files uploaded wi
 * Initial Release of Plugin
 
 == Upgrade Notice ==
+
+= 1.3 =
+* Updated readme.
+
+= 1.2 =
+* Added no zip addition to multifile upload.
 
 = 1.1 =
 * Added zip functionality to multifile upload.
