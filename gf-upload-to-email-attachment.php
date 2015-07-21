@@ -1,11 +1,11 @@
 <?php
 /*
   Plugin Name: GF Upload to Email Attachment
-  Plugin URI: http://wpcms.ninja/
-  Description: Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  If multiple files are attached it attempts to create a zip file to send.
+  Plugin URI: http://www.gregwhitehead.us/
+  Description: Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  If multiple files are attached it attempts to create a zip file to send. If you do not want to have it zip up then use GFUEANZ instead of GFUEA to signify do not zip up files for this notification.
   Author: Greg Whitehead
-  Author URI: http://wpcms.ninja
-  Version: 1.1
+  Author URI: http://www.billiardgreg.com
+  Version: 1.2
  */
  
  
@@ -16,9 +16,20 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
 	
 #    mail("greg@wpcms.ninja","Notification Fire" . date("Y-m-d h:i:s"), print_r($notification, true) . print_r($form,true) . print_r($entry,true));
 	
+	$last5 = substr($notification["name"],-5);
+	$last7 = substr($notification["name"],-7);
 	
-    if(substr($notification["name"],-5) == "GFUEA" ){
+    if($last5 == "GFUEA" || $last7 == "GFUEANZ") {
     	//mail("greg@wpcms.ninja","Notification Fire" . date("Y-m-d h:i:s"), print_r($notification, true) . print_r($form,true) . print_r($entry,true));
+		
+		if ($last7 == "GFUEANZ"){
+			$attemptzip = false;
+			//mail("greg@wpcms.ninja","No Zipping","Test");
+		} else {
+			$attemptzip = true;
+			//mail("greg@wpcms.ninja","Zipping","Test");	
+		}
+		
 
        $fileupload_fields = GFCommon::get_fields_by_type( $form, array( 'fileupload' ) );
  
@@ -37,11 +48,10 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
                 continue;
             } elseif ( $field['multipleFiles'] ) {
                 $uploaded_files = json_decode( stripslashes( $url ), true );
-			  
-			$zip = new ZipArchive();
+			  $zip = new ZipArchive();
 			  //$filetext = date("Y-m-d his");
 			$filename = $upload_root . "/uploaded_files".$entry['id'].".zip";
-			  if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+			  if ($zip->open($filename, ZipArchive::CREATE)!==TRUE || $attemptzip == false) {
 	                foreach ( $uploaded_files as $uploaded_file ) {
      	               $attachment = preg_replace( '|^(.*?)/gravity_forms/|', $upload_root, $uploaded_file );
                     	GFCommon::log_debug( $log . 'attaching the file: ' . print_r( $attachment, true  ) );
