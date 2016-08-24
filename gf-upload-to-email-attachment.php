@@ -5,10 +5,10 @@
   Description: Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  You can now tick a checkbox in the notifications area to specify whether or not you want the file attached. If multiple files you are then able to have it attempt to zip before sending too. Also ability to delete files on email getting sent.
   Author: Greg Whitehead
   Author URI: http://wpcms.ninja
-  Version: 2.1
+  Version: 2.2
  */
- 
- 
+
+
 add_filter('gform_notification', 'GFUEA_custom_notification_attachments', 10, 3);
 function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
     global $gf_delete_files;
@@ -19,8 +19,8 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
 	$attach_upload_to_email = rgar( $notification, 'gfu_attach_upload_to_email' );
     $zip_attachment = rgar( $notification, 'gfu_zip_attachment' );
     $gf_delete_files = rgar( $notification, 'gfu_delete_files' );
-    if( ($last5 == "GFUEA" || $last7 == "GFUEANZ") || $attach_upload_to_email == 'yes' ) {
-		if ($last7 == "GFUEANZ" || $zip_attachment == false ){
+    if( ($last5 == "GFUEA" || $last7 == "GFUEANZ") || $attach_upload_to_email == "yes" ) {
+		if ($last7 == "GFUEANZ" || $zip_attachment == "no" ){
 			$attemptzip = false;
 		} else {
 			$attemptzip = true;
@@ -31,7 +31,7 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
         }
         $attachments = array();
         $upload_root = RGFormsModel::get_upload_root();
-        error_log("upload_root: " . $upload_root);
+        GFCommon::log_debug("upload_root: " . $upload_root);
         foreach( $fileupload_fields as $field ) {
             $url = $entry[ $field['id'] ];
             if ( empty( $url ) ) {
@@ -39,7 +39,7 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
             } elseif ( $field['multipleFiles'] ) {
                 $uploaded_files = json_decode( stripslashes( $url ), true );
 			    $zip = new ZipArchive();
-    			$filename = $upload_root . "/uploaded_files".$entry['id'].".zip";
+    			$filename = $upload_root . "uploaded_files".$entry['id'].".zip";
 	            if ($zip->open($filename, ZipArchive::CREATE)!==TRUE || $attemptzip == false) {
 	                foreach ( $uploaded_files as $uploaded_file ) {
                         $attachment = preg_replace( '|^(.*?)/gravity_forms/|', $upload_root, $uploaded_file );
@@ -55,7 +55,7 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
                 	}
 				  $zip->close();
 				  $attachments[] = $filename;
-				  add_filter( 'gform_confirmation', 'gfuea_clean_zips', 10, 4 );				  
+				  add_filter( 'gform_confirmation', 'gfuea_clean_zips', 10, 4 );
 			  }
             } else {
                 $attachment = preg_replace( '|^(.*?)/gravity_forms/|', $upload_root, $url );
@@ -72,13 +72,13 @@ function GFUEA_custom_notification_attachments( $notification, $form, $entry ) {
 function gfuea_clean_zips($confirmation, $form, $entry, $ajax) {
     global $gf_delete_files;
     $upload_root = RGFormsModel::get_upload_root();
-    $filename = $upload_root . "/uploaded_files".$entry['id'].".zip";
+    $filename = $upload_root . "uploaded_files".$entry['id'].".zip";
     if (is_file($filename)){
         unlink($filename);
     }
     if ($gf_delete_files == 'yes') {
         //delete all files that were uploaded
-        
+
         $attachments_to_delete = array();
 
         $fileupload_fields = GFCommon::get_fields_by_type( $form, array( 'fileupload' ) );
@@ -94,7 +94,7 @@ function gfuea_clean_zips($confirmation, $form, $entry, $ajax) {
                         foreach ( $uploaded_files as $uploaded_file ) {
                             $attachments_to_delete[] = preg_replace( '|^(.*?)/gravity_forms/|', $upload_root, $uploaded_file );
                         }
-                      
+
                 } else {
                     $attachments_to_delete[] =  preg_replace( '|^(.*?)/gravity_forms/|', $upload_root, $url );
                 }

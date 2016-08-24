@@ -1,7 +1,7 @@
 === GF Upload to Email Attachment ===
 Contributors: billiardgreg
 Donate link: http://wpcms.ninja/
-Tags: 
+Tags:
 Requires at least: 4.2.2
 Tested up to: 4.5.3
 Stable tag: trunk
@@ -34,10 +34,15 @@ Check off box in notification settings to enable file attachment.
 
 == Changelog ==
 
-= 2.1 = 
+= 2.2 =
+* Update code for checkbox comparison on zip option.
+* Remove force error debug code.
+* Remove extra forward-slash on filename variable.
+
+= 2.1 =
 * Added delete file checkbox to delete the files from the server after confirmation of form submission.  Will be adding ability to delete entry in future.
 
-= 2.0 = 
+= 2.0 =
 * Decided recent change signified a good step forward to making it 2.0. Also cleaned up code.
 
 = 1.3.1 =
