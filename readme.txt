@@ -1,22 +1,20 @@
 === GF Upload to Email Attachment ===
 Contributors: billiardgreg
 Donate link: http://wpcms.ninja/
-Tags: 
-Requires at least: 3.8.3
-Tested up to: 4.2.2
+Tags:
+Requires at least: 4.2.2
+Tested up to: 4.5.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This allows you to create a notification in gravity forms of an email that would send with the files being uploaded by that form as an attachment. Use GFEAU and GFEAUNZ in the notification title you can add files to outbound email.
+This allows you to create a notification in gravity forms of an email that would send with the files being uploaded by that form as an attachment. Checkboxes in the notification area allow for you to setup a notification to attach files. Also ability to delete files on email getting sent.
 
 == Description ==
 
-Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  By creating a notification in the form with GFUEA added to the end of it tells Gravity Forms to also attach any files to the outbound email as well as save it with the entry in the back-end.  
+Gravity Forms was built to be able to store all uploaded files to the server and email you a link.  There are times that you need to have that file get attached to the notification email.  You can now tick a checkbox in the notifications area to specify whether or not you want the file attached. If multiple files you are then able to have it attempt to zip before sending too. Also ability to delete files on email getting sent.
 
-Works with both single and multiple upload boxes as well as multiiple notifiations.  As this notification name isn't really used in any other place I thought it would be the easiest way to add this functionality.  If multiple files are attached it attempts to create a zip file to send and after confirmation message is sent it removes the zip file.  Adding NZ so the end of the notification reads GFUEANZ tells the plugin to not zip up the files when attaching.
-
-Utilizes code example from Gravity Forms gforms_notification page modified to attach the files getting uploaded to the notification email based upon last 5 characters of the notification name.    
+Works with both single and multiple upload boxes as well as multiiple notifiations.  I left the old GFUEA and GFUEANZ designations in the name for people still using it.
 
 == Frequently Asked Questions ==
 
@@ -28,13 +26,28 @@ You can email greg@wpcms.ninja to receive answers or go to http://wpcms.ninja
 
 Install plugin and activate.
 
-Add GFUEA or GFUEANZ for No Zipping to the Gravity Forms email notification name and all files uploaded will be attached to outbound email.
+Check off box in notification settings to enable file attachment.
 
 == Screenshots ==
 
 1. No Screenshot
 
 == Changelog ==
+
+= 2.2 =
+* Update code for checkbox comparison on zip option.
+* Remove force error debug code.
+* Remove extra forward-slash on filename variable.
+
+= 2.1 =
+* Added delete file checkbox to delete the files from the server after confirmation of form submission.  Will be adding ability to delete entry in future.
+
+= 2.0 =
+* Decided recent change signified a good step forward to making it 2.0. Also cleaned up code.
+
+= 1.3.1 =
+* Added customization through checkboxes instead of through name modification.
+* Kept name modification active to keep old implementation working.
 
 = 1.3 =
 * Updated readme.
@@ -52,6 +65,15 @@ Add GFUEA or GFUEANZ for No Zipping to the Gravity Forms email notification name
 * Initial Release of Plugin
 
 == Upgrade Notice ==
+
+= 2.1 =
+* Added delete file capability on form confirmation.
+
+= 2.0 =
+* Went through cleaning up code.
+
+= 1.3.1 =
+* Modified system to work with checkboxes in notification area instead of modifying the name of the notification.  Made it so plugin still works with name modification.
 
 = 1.3 =
 * Updated readme.
